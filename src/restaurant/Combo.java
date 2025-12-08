@@ -17,14 +17,17 @@ public class Combo extends MenuItem {
         return comboPrice;
     }
 
-    @Override
-    public String getDescription() {
-        StringBuilder sb = new StringBuilder(name + " - Combo - " + comboPrice + " EGP\nIncludes:");
-        for (MenuItem item : items) {
-            sb.append("\n  * ").append(item.getName()); // just name for clarity
-        }
-        return sb.toString();
+@Override
+public String getDescription() {
+    String description = name + " - Combo - " + comboPrice + " EGP\nIncludes:";
+
+    for (MenuItem item : items) {
+        description += "\n  * " + item.getName();
     }
+
+    return description;
+}
+
 
     // ✅ Add getter so other classes can access combo items safely
     public List<MenuItem> getItems() {
