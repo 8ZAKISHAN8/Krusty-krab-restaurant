@@ -23,17 +23,22 @@ public class Main {
         System.out.println("=== MENU ===");
         menu.displayMenu();
 
-        // === CREATE ORDER ===
+        // === FIRST ORDER ===
+        System.out.println("\n--- FIRST ORDER ---");
         Order order1 = new Order(new DineInCustomer("SpongeBob", 5));
         order1.addItem(krabby, 2); // 2 Krabby Patties
         order1.addItem(cola, 1);   // 1 Coral Cola
-
-        // Set payment method and pay
         order1.setPaymentMethod(new CashPayment());
         order1.pay();
-
-        // Print order summary
         printOrderSummary(order1);
+
+        // === SECOND ORDER (redeem points) ===
+        System.out.println("\n--- SECOND ORDER ---");
+        Order order2 = new Order(order1.getCustomer()); // same customer
+        order2.addItem(fries, 3);                       // 3 Kelp Fries
+        order2.setPaymentMethod(new CardPayment());
+        order2.pay();
+        printOrderSummary(order2);
     }
 
     public static void printOrderSummary(Order order) {
@@ -41,11 +46,17 @@ public class Main {
         System.out.println("Customer: " + order.getCustomer().getName());
         System.out.println("Service: " + order.getCustomer().getServiceType());
 
+        // Display table or address if applicable
+        if (order.getCustomer() instanceof DineInCustomer dine) {
+            System.out.println("Table: " + dine.getTableNumber());
+        } else if (order.getCustomer() instanceof DeliveryCustomer del) {
+            System.out.println("Address: " + del.getAddress());
+        }
+
         System.out.println("\nItems:");
         for (OrderItem oi : order.getItems()) {
             MenuItem item = oi.getItem();
-            if (item instanceof Combo) {
-                Combo combo = (Combo) item;
+            if (item instanceof Combo combo) {
                 System.out.println("- " + combo.getName() + " - " + combo.getPrice() + " EGP");
                 System.out.println("  Includes:");
                 for (MenuItem ci : combo.getItems()) {
@@ -59,5 +70,10 @@ public class Main {
         }
 
         System.out.println("Total (with TAX): " + order.getTotal() + " EGP");
+
+        // Display loyalty points if the customer has them
+        if (order.getCustomer() instanceof LoyaltyPoints lpCustomer) {
+            System.out.println("Loyalty Points: " + lpCustomer.getPoints());
+        }
     }
 }
