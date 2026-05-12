@@ -5,7 +5,19 @@ ordering system designed for Bikini Bottom's favorite eatery. This project
 demonstrates advanced Java Swing UI design, relational database management, and
 object-oriented logic.
 
+## 📺 Demo Video
+A short demonstration video of the application workflow is included in this repository.
 
+[Watch the Krusty Krab Project Demo Video](Krusty%20Krab_compressed.mp4)
+
+**The demo showcases:**
+- **Entrance & Navigation:** Interactive startup screen and entry into the restaurant.
+- **Menu Selection:** Choosing items (Burgers, Fries, Drinks) and selecting specific sizes.
+- **Cart Management:** Adding items to the order and reviewing selections.
+- **Checkout Flow:** Finalizing the order and choosing between **Dine-In** or **Delivery**.
+- **Receipt Generation:** Dynamic calculation of total price, taxes, and order summary.
+
+---
 
 ## How to Run
 Since this project is in the development environment and does not have a
